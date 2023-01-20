@@ -10,14 +10,16 @@ import Button from './../button/Button'
 
 export default function TimetableSetup (props) {
     const [details, setDetails] = useState({
-        periods: [],
+        periods: '4hours', // defaultValue of the select
         days: [],
     })
 
     const [allSelected, setAllSelected] = useState(false);
 
-    const passDetailUp = () => {
+    const passDetailsUp = () => {
+        console.log(details);
 
+        props.passdetails(details);
     }
 
     const handleSelected = (event) => {
@@ -48,19 +50,28 @@ export default function TimetableSetup (props) {
         event.target.classList.toggle('all')
     }
 
+    const selectTimeHandler = e => {
+        setDetails((prevDetails) => { 
+            return {
+                ...prevDetails,
+                periods: e.target.value,
+            }       
+        })
+    }
+
 
     return (
         <div className="modal__full">
-            { console.log('w', ...details.days) }
+            {/* { console.log('w', ...details.days) } */}
             <form>
                 <div className="form-control">
                     <label className='labels' htmlFor="hours-count">
                         Hour many hours do you intend to study
                     </label>
-                    <select name="hours-count" id="hours-count">
-                        <option value='8hours'> 8 hours (from 7:00 to 14:00)</option>
+                    <select name="hours-count" id="hours-count" onChange={selectTimeHandler}>
                         <option value='4hours' defaultValue='4hours'> 4 hours (frm 7:00 to 11:00)</option>
-                        <option> 12 hours</option>
+                        <option value='8hours'> 8 hours (from 7:00 to 14:00)</option>
+                        <option value='12hours'> 12 hours</option>
                     </select>
                 </div>
                 <div className="form-control">
@@ -80,7 +91,7 @@ export default function TimetableSetup (props) {
                 </div>
 
                 {/* <div className="form-control"> */}
-                    <Button className='generate-form-btn' onClick={passDetailUp} >Generate Table</Button>
+                    <Button className='generate-form-btn' onClick={passDetailsUp} >Generate Table</Button>
                 {/* </div> */}
             </form>
         </div>     

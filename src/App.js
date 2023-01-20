@@ -1,4 +1,8 @@
+import "./App.css";
+
 import { useState } from "react";
+
+
 
 import TimetableSetup from './components/modals/TimetableSetup';
 import Button from "./components/button/Button";
