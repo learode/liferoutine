@@ -17,9 +17,8 @@ export default function TimetableSetup (props) {
     const [allSelected, setAllSelected] = useState(false);
 
     const passDetailsUp = () => {
-        console.log(details);
 
-        props.passdetails(details);
+        props.passDetails(details);
     }
 
     const handleSelected = (event) => {
