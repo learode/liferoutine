@@ -1,12 +1,54 @@
 table,
+/* caption, */
 thead,
 tbody,
 tr,
 th,
-td {
+td 
+{
     border: 1px solid black;
     border-collapse: collapse;
 }
+
+table {
+    margin: auto;
+    margin-top: 1rem;
+}
+
+caption {
+    border-bottom: none;
+}
+
+caption > div {
+    display: flex;
+    justify-content: right;
+    font-size: .8rem;
+}
+
+caption  button {
+    padding: .4rem .6rem;
+    border-style: solid;
+    border-color: black;
+    border-bottom: none;
+    border-top-width: 1px;
+}
+
+caption button:nth-child(1) {
+    border-left-width: 1px;
+    border-top-left-radius: 4px;
+    /* border-right: none; */
+}
+caption button:nth-child(2) {
+    border-right-width: 1px;
+    border-top-right-radius: 4px;
+    border-left: none;
+}
+
+
+caption span:hover {
+    background: #000;
+}
+
 
 td, th {
     padding: .6rem 1.2rem;

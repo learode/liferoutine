@@ -1,12 +1,14 @@
 import "./App.css";
 
 import { useState } from "react";
+import { loadStorage, setStorage } from "./utils/storage";
 
 
 
 import TimetableSetup from './components/modals/TimetableSetup';
 import Button from "./components/button/Button";
 import Table from "./components/table/Table"
+import { useEffect } from "react";
 
 
 
@@ -18,7 +20,7 @@ const timeRanges = {
 function App() {
   const [showTableSetup, setShowTableSetup] = useState(false);
   const [tableSetup, setTableSetup] = useState(false);
-  const [tableHeaderData, setTableHeaderData] = useState(null);
+  const [tableData, setTableData] = useState(null);
 
 
   const tableDataHandler = tableHeadObj => {
@@ -26,25 +28,38 @@ function App() {
 
     setShowTableSetup(false);
     if (tableHeadObj?.days.length > 1) {
-
-      console.log(tableHeadObj.days)
-      setTableHeaderData({
+      let headers = {
         ...tableHeadObj,
         periods: timeRanges[tableHeadObj.periods]
-      });
+      }
+      
+      setTableData(headers);
+      setStorage(headers);
+      
       setTableSetup(true);
     }
   }
   const showForm = () => setShowTableSetup(true)
 
 
-  
+  useEffect(() => {
+    let tableHeadData = loadStorage();
+    if (tableHeadData) {
+      setTableData(tableHeadData);
+      setTableSetup(true);
+    }
+
+    else {
+      console.log("What nigga?")
+    }
+  }, []);
+
 
   return (
     <div className="App">
       {showTableSetup && <TimetableSetup passDetails={tableDataHandler} />}
 
-      {tableHeaderData && <Table data={tableHeaderData} />}
+      {tableData && <Table data={tableData} />}
 
 
       <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>

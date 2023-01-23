@@ -6,6 +6,12 @@ const Table = ({data}) => {
     
     return (
       <table>
+        <caption>
+          <div>
+            <button className='table__edit'>Edit</button>
+            <button className='table__del'>Delete</button>
+          </div>
+        </caption>
         <thead>
           <tr>
              <th>Time/day</th>
