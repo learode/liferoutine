@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { useState } from "react";
-import { loadStorage, setStorage } from "./utils/storage";
+import { loadStorage, setStorage, removeStorage } from "./utils/storage";
 
 
 
@@ -42,6 +42,15 @@ function App() {
   const showForm = () => setShowTableSetup(true)
 
 
+
+  const deleteTable = () => {
+    removeStorage();
+    setTableData(null);
+    setTableSetup(false);
+    setShowTableSetup(false);
+  }
+
+
   useEffect(() => {
     let tableHeadData = loadStorage();
     if (tableHeadData) {
@@ -59,7 +68,7 @@ function App() {
     <div className="App">
       {showTableSetup && <TimetableSetup passDetails={tableDataHandler} />}
 
-      {tableData && <Table data={tableData} />}
+      {tableData && <Table data={tableData} deleteTable={deleteTable}/>}
 
 
       <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>

@@ -12,5 +12,5 @@ eg 7 to 24
 - [] In the prompt allow to select the days the course appears on the table
 - [] If selected a dropdown of time allowing for selection of the time frame the course is at
 - [] Allow labels of difficulties, VeryBoring, Boring, Guessing, Interesting, VeryInteresting
-- [] Allow for a table to be deleted
-- [] Remove the edit and allow the deleted on the table top hover
+- [x] Allow for a table to be deleted
+- [x] Remove the edit and allow the deleted on the table top hover
