@@ -13,10 +13,15 @@ const loadStorage = () => {
     return JSON.parse(data);
 }
 
+const removeStorage = () => {
+    sessionStorage.removeItem(DATA_NAME);
+}
+
 
 
 
 export {
     setStorage,
     loadStorage,
+    removeStorage,
 }
