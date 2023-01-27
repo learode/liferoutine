@@ -1,4 +1,4 @@
-import './Button.css'
+import './Button.scss'
 
 export default function Button (props) {
     return (
@@ -6,6 +6,8 @@ export default function Button (props) {
                 onClick={props.onClick}
                 className={`btn ${props.className}`}
                 disabled={props.disabled}
-                >{props.children}</button>
+        >
+            {props.children}
+        </button>
     )
 }

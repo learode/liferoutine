@@ -1,0 +1,11 @@
+@mixin d-flex($direction, $justify, $align) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $direction;
+}
+
+@mixin padding_tb ($top, $bottom) {
+    padding-top: $top;
+    padding-bottom: $bottom;
+}

@@ -1,0 +1,34 @@
+@import "../../utils/topography";
+@import "../../utils/color";
+
+.timetable {
+    min-width: 80%;
+    min-height: 70vh;
+    height: 76vh;
+    margin: auto;
+    margin-top: 1rem;
+    border-collapse: collapse;
+    font-size: $fs-normal;
+    color: #5c5c5c;
+  
+    *:not(caption):not(h2) {
+        border: 1px solid $black-secondary;
+    }
+    .t__caption {
+        padding: 1.4rem;
+    }
+    h2 {
+        font-family: Cambria, Cochin, Georgia, serif;
+    }
+    th { 
+        background-color: $white-secondary;
+    }
+}
+
+td, th {
+    padding: .6rem 1.2rem;
+}
+
+tr:hover td {
+    cursor: pointer;
+}

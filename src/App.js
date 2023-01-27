@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 
 import { useState } from "react";
 import { loadStorage, setStorage, removeStorage } from "./utils/storage";
@@ -66,9 +66,16 @@ function App() {
 
   return (
     <div className="App">
-      {showTableSetup && <TimetableSetup passDetails={tableDataHandler} />}
+      <aside>
 
-      {tableData && <Table data={tableData} deleteTable={deleteTable}/>}
+      </aside>
+
+
+      <main>
+        {showTableSetup && <TimetableSetup passDetails={tableDataHandler} />}
+
+        {tableData && <Table data={tableData} deleteTable={deleteTable}/>}
+      </main>
 
 
       <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>

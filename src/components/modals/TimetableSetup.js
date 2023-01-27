@@ -2,7 +2,7 @@
  * Collect the users time details and the days
  * Pass this data to the App
  */
-import './TimetableSetup.css'
+import './TimetableSetup.scss'
 
 import { useState } from "react"
 

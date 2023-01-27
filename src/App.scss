@@ -1,0 +1,22 @@
+@import "./utils/color";
+@import "./utils/topography";
+
+
+.App {
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+    height: 100vh;
+
+    main {
+        background-color: $white-primary;
+        margin-right: .8rem;
+    }
+}
+
+
+.btn__float {
+    position: absolute;
+        right: 1.8rem;
+        bottom: 2.2rem;
+}

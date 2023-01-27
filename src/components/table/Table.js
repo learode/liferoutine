@@ -1,6 +1,6 @@
 
-import { useState, useEffect } from 'react';
-import './Table.css';
+import { useState } from 'react';
+import './Table.scss';
 
 import SubjectDetails from '../modals/SubjectDetails';
 
@@ -26,7 +26,6 @@ const Table = ({data, deleteTable}) => {
     */
     const [tableSubjects, setTableSubjects] = useState({});
     const [isInsert, setIsInsert] = useState(false);
-    const [refresh, setRefresh] = useState(false);
     const [weeksub, setWeeksub] = useState(new Array(days.length).fill(""));
 
     const [parentRow, setParentRow] = useState('');
@@ -56,7 +55,6 @@ const Table = ({data, deleteTable}) => {
       })
 
       setIsInsert(false);
-      setRefresh(true);
     }
 
     /**
@@ -69,19 +67,15 @@ const Table = ({data, deleteTable}) => {
       // console.log(e.target.parentNode.dataset.rowId)
     }
 
-
-    useEffect(() => {
-    }, [refresh])
-
     return (
       <>
         {isInsert && <SubjectDetails days={days} getSubject={getSubject}/>}
         {console.log(weeksub)}
-        <table>
-          <caption>
-            <div>
-              <button className='table__del' onClick={deleteTable}>Delete</button>
-            </div>
+        <table onAuxClick={e => {console.log(e); e.preventDefault()}} className='timetable'>
+          <caption className='t__caption'>
+            <h2>
+              This Table's Title
+            </h2>
           </caption>
           <thead>
             <tr>

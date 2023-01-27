@@ -1,4 +1,4 @@
-import './SubjectDetails.css';
+import './SubjectDetails.scss';
 
 import { useState } from 'react';
 
