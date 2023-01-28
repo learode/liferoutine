@@ -24,8 +24,6 @@ function App() {
 
 
   const tableDataHandler = tableHeadObj => {
-    console.log(tableHeadObj)
-
     setShowTableSetup(false);
     if (tableHeadObj?.days.length > 1) {
       let headers = {

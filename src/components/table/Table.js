@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './Table.scss';
 
 import SubjectDetails from '../modals/SubjectDetails';
+import { useEffect } from 'react';
 
 
 
@@ -12,33 +13,35 @@ import SubjectDetails from '../modals/SubjectDetails';
 const Table = ({data, deleteTable}) => {
     const {periods, days} = data;
     /** 
-     * @var tableSubjects has the structure of an object with the key
+     * @var tableSubjects has the structure of an aray with the index
      * beening the parentRow of the table and which is a collection of subject
      * the index of the subject is the same as the thisCol value.
-     * parentRow = [subjects]
+     * 
      * parentRow is the time?
      * cellCol is the index of the day of the week
      * 
-     * tableSubjects = {
-     *    "0": [phys, maths],
-     *    "2": [fre, sprt],
+     * tableSub = [
+     *    [phys, maths],
+     *    [fre, sprt],
+     * ]
      * }
     */
-    const [tableSubjects, setTableSubjects] = useState({});
+    const [tableSub, setTableSub] = useState([]);
     const [isInsert, setIsInsert] = useState(false);
-    const [weeksub, setWeeksub] = useState(new Array(days.length).fill(""));
 
-    const [parentRow, setParentRow] = useState('');
+    const [parentRow, setParentRow] = useState(null);
+    const [thisDay, setThisDay] = useState(null);
 
     /**
      * **getSubject(objt)** is passed as props to the SubjectDetails to collect the 
      * subject and days for the subject. 
-     * @param {objt} objt an objt of days selected and subject entered
+     * @param {Object} objt an objt of days selected and subject entered
      * days - is an array of indexed in wrt the map index 
      */
     const getSubject = objt => {
-      let cellData = tableSubjects[parentRow] || [];
-      // cellData[0] =  `time${parentRow}`;
+      let cellData = tableSub[parentRow] || [];
+
+      console.log(objt)
       for (let day of objt.days) {
         cellData[day] = objt.subject;
         // if (cellData[day] === undefined) {
@@ -46,32 +49,48 @@ const Table = ({data, deleteTable}) => {
         // }
       }
 
-      setWeeksub([...cellData])
-      setTableSubjects(prevInfo => {
-        return {
-          ...prevInfo,
-          [parentRow]: cellData,
-        }
-      })
+      // setPeriodSub([...cellData])
+      // setTableSub(prevInfo => {
+      //   return {
+      //     ...prevInfo,
+      //     [parentRow]: cellData,
+      //   }
+      // })
 
       setIsInsert(false);
     }
 
     /**
      * **clickHandler** handle what happens when a cell is clicked
-     * @param {e} e browser event
+     * @param {event} e browser event
      */
     const clickHandler = (e) => {
       setIsInsert(true);
       setParentRow(e.target.parentNode.dataset.rowId);
+      setThisDay(e.target.dataset.colId);
       // console.log(e.target.parentNode.dataset.rowId)
     }
 
+
+    // Setup the table struct using periods and day into tableSub
+    // once when page load
+    useEffect(() => {
+      let temp_period_sub = [];
+      
+      
+      setTableSub(prev => {
+        for (let p in periods) { 
+          temp_period_sub[p] = prev?.[p] ? [...prev[p]] : new Array(days.length).fill('');
+
+        }
+        return temp_period_sub;
+      })
+    }, [periods, days.length]);
+
     return (
       <>
-        {isInsert && <SubjectDetails days={days} getSubject={getSubject}/>}
-        {console.log(weeksub)}
-        <table onAuxClick={e => {console.log(e); e.preventDefault()}} className='timetable'>
+        {isInsert && <SubjectDetails days={days} getSubject={getSubject} thisDay={thisDay}/>}
+        <table onContextMenu={e => {e.preventDefault(); console.log(e) }} className='timetable'>
           <caption className='t__caption'>
             <h2>
               This Table's Title
@@ -89,33 +108,19 @@ const Table = ({data, deleteTable}) => {
           </thead>
           <tbody>
             {
-              periods.map((time, i) => {
-                
-                if (Number(parentRow) === i) {
-                  // console.log(i, +parentRow, i === Number(parentRow));
+              tableSub.map((subs, periodPos) => {
                   return (
-                    <tr key={i} data-row-id={i}>
-                      <th>{time}</th>
+                    <tr key={periodPos} data-row-id={periodPos}>
+                      <th>{periods[periodPos]}</th>
                       {
-                        weeksub.map((sjt, i) => {
+                        subs.map((sjt, i) => {
                           return <td key={i} onClick={clickHandler} data-col-id={i}>{sjt}</td>
                         })
                       }
                     </tr>
                   ) 
-                } else {
-                  return (
-                    <tr key={i} data-row-id={i}>
-                      <th>{time}</th>
-                      {
-                        weeksub.map((sjt, i) => {
-                          return <td key={i} onClick={clickHandler} data-col-id={i}>&nbsp;</td>
-                        })
-                      }
-                    </tr>
-                  ) 
                 }
-              })
+              )
             }
           </tbody>
         </table> 
