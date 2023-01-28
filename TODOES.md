@@ -11,11 +11,12 @@ eg 7 to 24
 - [x] persist table data onload
 - [x] Allow for a table to be deleted
 - [x] Remove the edit and allow the deleted on the table top hover
-- [] Allow to click on the cells to enter the course or subject in question by a right click
+- [x] Allow to click on the cells to enter the course or subject in question 
+- [] allow entering subject by a right click
 - [] In the prompt allow to select the days the course appears on the table
 - [] If selected a dropdown of time allowing for selection of the time frame the course is at
 - [] Allow labels of difficulties, VeryBoring, Boring, Guessing, Interesting, VeryInteresting
-- [] Style the table to be good ui.
+- [x] Style the table to be good ui.
 - [] The Delete button is annoying, double check then have the option to delete
 - [] Make the entered subject persistent.
 - [] Load an already existing table.
