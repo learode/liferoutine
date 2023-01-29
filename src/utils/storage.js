@@ -1,20 +1,29 @@
 
-const DATA_NAME =  'rl_table_data'
-
-
-const setStorage = data => {
+/**
+ * Store the data with the identifier key in the sessionstorage of the browser.
+ * 
+ * @param {String} key - the identifier for the stored data
+ * @param {{periods: [], days: []}} data - a collection of periods and days 
+ */
+const setStorage = (key, data) => {
     let dt = JSON.stringify(data)
-    sessionStorage.setItem(DATA_NAME, dt);
+    sessionStorage.setItem(key, dt);
 }
 
-const loadStorage = () => {
-    let data = sessionStorage.getItem(DATA_NAME);
+/**
+ * Get the stored data with the **key** identifier 
+ * 
+ * @param {String} key - identifier of stored data
+ * @returns {{}} Js Object
+ */
+const loadStorage = key => {
+    let data = sessionStorage.getItem(key);
 
     return JSON.parse(data);
 }
 
-const removeStorage = () => {
-    sessionStorage.removeItem(DATA_NAME);
+const removeStorage = key => {
+    sessionStorage.removeItem(key);
 }
 
 

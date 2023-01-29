@@ -11,7 +11,7 @@ import Table from "./components/table/Table"
 import { useEffect } from "react";
 
 
-
+const HEADERS_KEY = 'lr_headers';
 const timeRanges = {
   '4hours': ['7:30 - 8:30', '8:35 - 10:35', '10:40 - 11:45', '11:50 - 13:00'],
   '8hours': ['7:30 - 8:30', '8:35 - 10:35', '10:40 - 11:45', '11:50 - 13:00', '7:30 - 8:30', '8:35 - 10:35', '10:40 - 11:45', '11:50 - 13:00'],
@@ -32,7 +32,7 @@ function App() {
       }
       
       setTableData(headers);
-      setStorage(headers);
+      setStorage(HEADERS_KEY, headers);
       
       setTableSetup(true);
     }
@@ -42,7 +42,7 @@ function App() {
 
 
   const deleteTable = () => {
-    removeStorage();
+    removeStorage(HEADERS_KEY);
     setTableData(null);
     setTableSetup(false);
     setShowTableSetup(false);
@@ -50,7 +50,7 @@ function App() {
 
 
   useEffect(() => {
-    let tableHeadData = loadStorage();
+    let tableHeadData = loadStorage(HEADERS_KEY);
     if (tableHeadData) {
       setTableData(tableHeadData);
       setTableSetup(true);
