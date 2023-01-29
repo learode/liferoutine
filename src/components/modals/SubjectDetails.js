@@ -1,6 +1,6 @@
 import './SubjectDetails.scss';
 
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 
 const SubjectDetails = (props) => {
@@ -53,25 +53,28 @@ const SubjectDetails = (props) => {
     }, [days, thisDay])
 
     return (
-      <div className='modal modal__full'>
-        <form>
-          <input type="text" name="subject" id="subject" placeholder='Phys3103' onChange={e => setSubject(e.target.value)}/>
-          <div className='row'>
-            {
-              days.map((day, i) => {
-                return (
-                  <Fragment key={i}>
-                    <input type="checkbox" name={day} value={i} checked={i === Number(thisDay)? true : false} onChange={handleCheckbox}/>
-                    <label htmlFor={day}>{day}</label>
-                  </Fragment>
-                )
-              })
-            }
-  
-          </div>
-  
-          <button type="submit" onClick={passUpSubject}>Add</button>
-        </form>
+      <div className='modal'>
+        <div className="modal__backdrop"></div>
+        <div className="modal__content">
+          <form>
+            <input type="text" name="subject" id="subject" placeholder='Phys3103' onChange={e => setSubject(e.target.value)}/>
+            <div className='row'>
+              {
+                days.map((day, i) => {
+                  return (
+                    <div key={i}>
+                      <input type="checkbox" name={day} id={day} value={i} defaultChecked={i === Number(thisDay) && true} onChange={handleCheckbox}/>
+                      <label htmlFor={day}> {day}</label>
+                    </div>
+                  )
+                })
+              }
+
+            </div>
+            
+            <button type="submit" onClick={passUpSubject}>Add</button>
+          </form>
+        </div>
       </div>
     )
   }
