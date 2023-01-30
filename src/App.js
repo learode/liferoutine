@@ -24,7 +24,6 @@ function App() {
   const [showTableSetup, setShowTableSetup] = useState(false);
   const [tableSetup, setTableSetup] = useState(false);
   const [tableData, setTableData] = useState(null);
-  const [showBtn, setShowBtn] = useState(true);
 
 
   const tableDataHandler = tableHeadObj => {
@@ -61,7 +60,7 @@ function App() {
     }
 
     else {
-      // console.log("header key is not found")
+      console.log("header key is not found")
     }
   }, []);
 
