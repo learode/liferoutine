@@ -18,35 +18,19 @@
 .modal__content form {
     padding: 2rem 1rem 1rem;
     @include d-flex(column, center, center);
-    
-    input[type="text"] {
-        width: 100%;
-        height: 2rem;
-        font-size: 1rem;
-        font-weight: bold;
-        border: 1px solid rgba(#0000, .5);
-
-        border-radius: 4px;
-
-        opacity: .8;
-        padding: .6rem .2rem;
-
-        margin-bottom: .8rem;
-    }
-
-    input[type="text"]:focus,
-    input[type="text"]:active {
-        outline: none;
-    }
 
     .row {
         width: 100%;
+        @include d-flex(row, center, center);
+        margin-top: .6rem;
+    }
+
+    .row__checkbox {
         border: 1px solid rgba(#0000, .5);
         background-color: white;
         padding: .4rem .4rem;
         border-radius: 4px;
-
-        @include d-flex(row, space-between, space-between);
+        @include d-flex(row, space-evenly, center);
         
         div:hover {
             transform: scale(1.1);
@@ -54,7 +38,32 @@
     }
 }
 
+.row_select_sub {
+    & > * {
+        height: 2rem;
+        border: 1px solid rgba(#0000, .5);
+        @include padding_rl(.2rem, .2rem);
+    }
+
+    input[type="text"] {
+        width: 100%;
+        opacity: .9;
+        border-radius: 4px 0 0 4px;
+
+    }
+    
+    input[type="text"]:focus,
+    input[type="text"]:active {
+        outline: none;
+    }
+    
+    select {
+        background-color: white;
+        border-left: none;
+        border-radius: 0 4px  4px 0;
+    }
+}
 button {
-    padding: .6rem 1rem;
+    padding: .6rem 1.4rem;
     margin-top: .8rem;
 }

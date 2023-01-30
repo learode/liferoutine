@@ -35,6 +35,7 @@ const SubjectDetails = (props) => {
             })
         }
     }
+    const handleSelect = e => {}
 
 
     // record the checked day i.e. the day that is clicked
@@ -57,8 +58,16 @@ const SubjectDetails = (props) => {
         <div className="modal__backdrop"></div>
         <div className="modal__content">
           <form>
-            <input type="text" name="subject" id="subject" placeholder='Phys3103' onChange={e => setSubject(e.target.value)}/>
-            <div className='row'>
+            <div className='row row_select_sub'>
+              <input type="text" name="subject" id="subject" placeholder='Phys3103' onChange={e => setSubject(e.target.value)}/>
+              <select name="dificult" id="dificulty" onChange={handleSelect}>
+                <option value="easy" defaultValue="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+                <option value="extreme">Extreme</option>
+              </select>
+            </div>
+            <div className='row row__checkbox'>
               {
                 days.map((day, i) => {
                   return (
@@ -69,8 +78,9 @@ const SubjectDetails = (props) => {
                   )
                 })
               }
-
             </div>
+
+            
             
             <button type="submit" onClick={passUpSubject}>Add</button>
           </form>

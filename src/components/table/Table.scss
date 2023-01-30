@@ -2,7 +2,8 @@
 @import "../../utils/color";
 
 .timetable {
-    min-width: 80%;
+    // min-width: 80%;
+    max-width: 80%;
     min-height: 70vh;
     height: 76vh;
     margin: auto;
@@ -20,14 +21,40 @@
     h2 {
         font-family: Cambria, Cochin, Georgia, serif;
     }
+    td, th {
+        height: 40px;
+    }
     th { 
         background-color: $white-secondary;
+        width: 140px;
+
+    }
+    td {
+        max-width: 100px;
+        min-width: 100px;
+        width: 100px;
+
+        font-size: 1em;
+        text-align: center;
+    }
+
+    td.easy {
+        background-color: rgba($color: rgba(46, 226, 46, 0.925), $alpha: .8);
+    }
+    td.medium {
+        background-color: rgba($color: #36c4f0, $alpha: .8);
+    }
+
+    td.hard {
+        background-color: rgba($color: #f85555, $alpha: .8);
+    }
+    
+    td.extreme {
+        background-color: rgba($color: #d81313, $alpha: .8);
+        color: white;
     }
 }
 
-td, th {
-    padding: .6rem 1.2rem;
-}
 
 tr:hover td {
     cursor: pointer;

@@ -9,3 +9,8 @@
     padding-top: $top;
     padding-bottom: $bottom;
 }
+
+@mixin padding_rl ($right, $left) {
+    padding-right: $right;
+    padding-left: $left;
+}
