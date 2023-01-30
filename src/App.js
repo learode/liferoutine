@@ -9,6 +9,9 @@ import TimetableSetup from './components/modals/TimetableSetup';
 import Button from "./components/button/Button";
 import Table from "./components/table/Table"
 import { useEffect } from "react";
+import { Link, Routes, Route } from "react-router-dom";
+import Todoes from "./pages/todoes/Todoes";
+import Pomodora from "./pages/pomodora/Pomodora";
 
 
 const HEADERS_KEY = 'lr_headers';
@@ -21,6 +24,7 @@ function App() {
   const [showTableSetup, setShowTableSetup] = useState(false);
   const [tableSetup, setTableSetup] = useState(false);
   const [tableData, setTableData] = useState(null);
+  const [showBtn, setShowBtn] = useState(true);
 
 
   const tableDataHandler = tableHeadObj => {
@@ -57,7 +61,7 @@ function App() {
     }
 
     else {
-      console.log("What nigga?")
+      // console.log("header key is not found")
     }
   }, []);
 
@@ -65,18 +69,59 @@ function App() {
   return (
     <div className="App">
       <aside>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/Todoes">Todoes</Link>
+            </li>
+            <li>
+              <Link to="/pomodora">Pomodora</Link>
+            </li>
+            <li>
+              <Link to="/omo">Others</Link>
+            </li>
+          </ul>
+        </nav>
 
       </aside>
 
 
       <main>
-        {showTableSetup && <TimetableSetup passDetails={tableDataHandler} />}
 
-        {tableData && <Table data={tableData} deleteTable={deleteTable}/>}
+          {showTableSetup && <TimetableSetup passDetails={tableDataHandler} />}
+        <Routes>
+
+          <Route
+            path="/"
+            element={<Table data={tableData} deleteTable={deleteTable}/>}
+          />
+
+          <Route 
+            path="todoes"
+            element={<Todoes />}
+          />
+
+          <Route 
+            path="pomodora"
+            element={<Pomodora />}
+          />
+
+          <Route
+            path="*"
+            element={<>
+              <div className="no-table">
+                <h3>Page not found</h3>
+              </div>
+            </>}
+          />
+        </Routes>
       </main>
 
-
-      <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>
+      {/* hide the button when there is table data is gotten */}
+      {!tableData && <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>}
     </div>
   );
 }

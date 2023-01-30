@@ -11,7 +11,6 @@ import { useEffect } from 'react';
 
 
 const Table = ({data, deleteTable}) => {
-    const {periods, days} = data;
     /** 
      * @var tableSubjects has the structure of an aray with the index
      * beening the parentRow of the table and which is a collection of subject
@@ -77,55 +76,81 @@ const Table = ({data, deleteTable}) => {
     useEffect(() => {
       let temp_period_sub = [];
       
-      
-      setTableSub(prev => {
-        for (let p in periods) { 
-          temp_period_sub[p] = prev?.[p] ? [...prev[p]] : new Array(days.length).fill('');
+      if (data) {
+        setTableSub(prev => {
+          for (let p in data.periods) { 
+            temp_period_sub[p] = prev?.[p] ? [...prev[p]] : new Array(data.days.length).fill('');
+            
+          }
+          return temp_period_sub;
+        })
+      }
 
-        }
-        return temp_period_sub;
-      })
-    }, [periods, days.length]);
+    }, [data]);
 
-    return (
-      <>
-        {isInsert && <SubjectDetails days={days} getSubject={getSubject} thisDay={thisDay}/>}
-        <table onContextMenu={e => {e.preventDefault(); console.log(e) }} className='timetable'>
-          <caption className='t__caption'>
-            <h2>
-              This Table's Title
-            </h2>
-          </caption>
-          <thead>
-            <tr>
-               <th>Time/day</th>
-              {
-                days.map((day, i) => {
-                  return <th key={i}>{day}</th>
-                })
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {
-              tableSub.map((subs, periodPos) => {
-                  return (
-                    <tr key={periodPos} data-row-id={periodPos}>
-                      <th>{periods[periodPos]}</th>
-                      {
-                        subs.map((sjt, i) => {
-                          return <td key={i} onClick={clickHandler} data-col-id={i}>{sjt}</td>
-                        })
-                      }
-                    </tr>
-                  ) 
+
+
+    /**
+     * TableAvaibility get using the data props verify which Jsx to return
+     * @returns Jsx
+     */
+    const TableAvaibility = () => {
+      if (data) {
+        return (
+          <>
+            {isInsert && <SubjectDetails days={data.days} getSubject={getSubject} thisDay={thisDay}/>}
+            <table onContextMenu={e => {e.preventDefault(); console.log(e) }} className='timetable'>
+              <caption className='t__caption'>
+                <h2>
+                  This Table's Title
+                </h2>
+              </caption>
+              <thead>
+                <tr>
+                  <th>Time/day</th>
+                  {
+                    data.days.map((day, i) => {
+                      return <th key={i}>{day}</th>
+                    })
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  tableSub.map((subs, periodPos) => {
+                      return (
+                        <tr key={periodPos} data-row-id={periodPos}>
+                          <th>{data.periods[periodPos]}</th>
+                          {
+                            subs.map((sjt, i) => {
+                              return <td key={i} onClick={clickHandler} data-col-id={i}>{sjt}</td>
+                            })
+                          }
+                        </tr>
+                      ) 
+                    }
+                    )
                 }
-              )
-            }
-          </tbody>
-        </table> 
-      </>
-    )
+              </tbody>
+            </table> 
+          </>
+        )
+
+      } else {
+        return (
+          <div className="no-table">
+              <h2>There is no table yet</h2>
+              <p>Click the <code>+</code> to create an table</p>
+          </div>
+        )
+      }
+    }
+
+
+
+
+    return <TableAvaibility />;
+
 }
 
 

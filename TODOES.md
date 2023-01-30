@@ -12,18 +12,18 @@ eg 7 to 24
 - [x] Allow for a table to be deleted
 - [x] Remove the edit and allow the deleted on the table top hover
 - [x] Allow to click on the cells to enter the course or subject in question 
-- [] allow entering subject by a right click
 - [x] In the prompt allow to select the days the course appears on the table
+- [x] Style the table to be good ui.
+- [x] Add routing functions for the other sections.
 - [] If selected a dropdown of time allowing for selection of the time frame the course is at
 - [] Allow labels of difficulties, VeryBoring, Boring, Guessing, Interesting, VeryInteresting
-- [x] Style the table to be good ui.
+- [] allow entering subject by a right click
 - [] The Delete button is annoying, double check then have the option to delete
 - [] Make the entered subject persistent.
 - [] Load an already existing table.
 - [] Add the cancel btn and styles to cancel the action of a modal.
 - [] Deny empty input text field.
 - [] cancel the modal on the outer backdrop click.
-- [] Add routing functions for the other sections.
 
 ### Todos
 - [] Have a form for the input, having the complete and a level of difficult
