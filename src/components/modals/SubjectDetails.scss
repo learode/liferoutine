@@ -30,7 +30,10 @@
 
 .modal__content form {
     padding: 2rem 1.6rem;
-    @include d-flex(column, center, center);
+
+    .warning {
+        color: $accent_2;
+    }
 
     .row {
         width: 100%;

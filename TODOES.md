@@ -22,7 +22,7 @@ eg 7 to 24
 - [] Make the entered subject persistent.
 - [] Load an already existing table.
 - [x] Add the cancel btn and styles to cancel the action of a modal.
-- [] Deny empty input text field.
+- [x] Deny empty input text field.
 - [x] cancel the modal on the outer backdrop click.
 
 ### Todos
