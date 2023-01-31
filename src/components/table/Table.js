@@ -38,23 +38,14 @@ const Table = ({data, deleteTable}) => {
      * days - is an array of indexed in wrt the map index 
      */
     const getSubject = objt => {
-      let cellData = tableSub[parentRow] || [];
 
-      console.log(objt)
-      for (let day of objt.days) {
-        cellData[day] = objt.subject;
-        // if (cellData[day] === undefined) {
-        //   // cellData[day] = '&nbsp;';
-        // }
+      if (objt.status === 'ok') {
+        let cellData = tableSub[parentRow] || [];
+        
+        for (let day of objt.data.days) {
+          cellData[day] = objt.data.subject;
+        }
       }
-
-      // setPeriodSub([...cellData])
-      // setTableSub(prevInfo => {
-      //   return {
-      //     ...prevInfo,
-      //     [parentRow]: cellData,
-      //   }
-      // })
 
       setIsInsert(false);
     }

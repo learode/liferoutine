@@ -21,9 +21,9 @@ eg 7 to 24
 - [] The Delete button is annoying, double check then have the option to delete
 - [] Make the entered subject persistent.
 - [] Load an already existing table.
-- [] Add the cancel btn and styles to cancel the action of a modal.
+- [x] Add the cancel btn and styles to cancel the action of a modal.
 - [] Deny empty input text field.
-- [] cancel the modal on the outer backdrop click.
+- [x] cancel the modal on the outer backdrop click.
 
 ### Todos
 - [] Have a form for the input, having the complete and a level of difficult

@@ -1,7 +1,9 @@
 import './SubjectDetails.scss';
 
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
+import Button from './../button/Button'
+
 
 const SubjectDetails = (props) => {
     const {days, thisDay, getSubject} = (props)
@@ -11,10 +13,13 @@ const SubjectDetails = (props) => {
     // This is pusible becuz, parentRow is alway an index of the same order of day
     const [selectedDays, setSelectedDays] = useState(null);
 
-    const passUpSubject = (e) => {
+    const passUpSubject = (status) => {
         getSubject({
-            'subject': subject,
-            'days': selectedDays,
+              status,
+              data: {
+                subject,
+                days: selectedDays,
+              }
         })
     }
 
@@ -55,7 +60,7 @@ const SubjectDetails = (props) => {
 
     return (
       <div className='modal'>
-        <div className="modal__backdrop"></div>
+        <div className="modal__backdrop" onClick={(e) => passUpSubject('cancel')}></div>
         <div className="modal__content">
           <form>
             <div className='row row_select_sub'>
@@ -80,9 +85,11 @@ const SubjectDetails = (props) => {
               }
             </div>
 
-            
-            
-            <button type="submit" onClick={passUpSubject}>Add</button>
+            <div className="actions row">
+              <Button type="reset">Reset</Button>
+              <Button type="submit" onClick={e => {e.preventDefault(); passUpSubject('ok')}}>Add</Button>
+              <Button className="cancel-btn" onClick={e => {e.preventDefault(); passUpSubject('cancel')}}>Cancel</Button>
+            </div>
           </form>
         </div>
       </div>
