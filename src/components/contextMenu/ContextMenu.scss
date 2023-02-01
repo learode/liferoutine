@@ -1,0 +1,24 @@
+@import '../../utils/color';
+
+.context-menu {
+    position: fixed;
+    z-index: 10000;
+    width: 160px;
+    height: 200px;
+    padding: .9rem 1rem;
+
+    background-color: $black-primary;
+    border-radius: 4px;
+    
+    .option {
+        padding: 8px 10px;
+        color: floralwhite;
+        font-size: .8rem;
+        border-radius: inherit;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #343434;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+@import '../../utils/color';
+@import '../../utils/mixins';
+
+section {
+    width: 100vw;
+    height: 100vh;
+
+    & > div {
+        width: inherit;
+        height: inherit;
+    }
+}
+
+
+.todo-listitem {
+
+    @include d-flex(row, space-between, center);
+    min-width: 20rem;
+    max-width: 26rem;
+    margin: .8rem auto;
+    
+    border-radius: 6px;
+    border: 1px solid $black-secondary;
+    padding: .8rem 1rem;
+    cursor: context-menu;
+
+    &:first-child {
+        flex-basis: 80%;
+    }
+}
