@@ -96,9 +96,9 @@ const SubjectDetails = (props) => {
               }
             </div>
 
-            <div className="actions row">
+            <div className="content__footer row">
               <Button type="submit" disabled={isSubEmpty} onClick={e => {e.preventDefault(); passUpSubject('ok')}}>Add</Button>
-              <Button className="cancel-btn" onClick={e => {e.preventDefault(); passUpSubject('cancel')}}>Cancel</Button>
+              <Button className="btn--cancel" onClick={e => {e.preventDefault(); passUpSubject('cancel')}}>Cancel</Button>
             </div>
           </form>
         </div>

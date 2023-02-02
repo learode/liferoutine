@@ -13,7 +13,7 @@
     border: none;
     outline: none;
     
-    &.cancel-btn {
+    &.btn--cancel {
         box-shadow: 1px 1px 0 $secondary_2;
         background-color: $accent_2;
         color: $white-primary;
@@ -26,7 +26,7 @@
         opacity: 1;
     }
     
-    &.cancel-btn:hover {
+    &.btn--cancel:hover {
         cursor: pointer;
         background-color: $accent_2;
     }

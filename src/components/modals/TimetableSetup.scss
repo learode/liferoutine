@@ -1,28 +1,5 @@
-@import "../../utils/mixins";
-
-.modal__full {
-    background-color: hsla(0, 0%, 13%, 0.438);
-    @include d-flex(column, center, center);
-    
-    height: 100vh;
-}
-
-form {
-    width: 28rem;
-    @include padding_tb(2rem, 2rem);
-    border-radius: 12px;
-    background-color: whitesmoke;
-}
-
-.form-control {
-    @include d-flex(column, center, center);
-    margin: 1.8rem auto;
-    width: fit-content;
-    gap: .2rem;
-
-    .labels {
-        font-size: 1.1rem;
-    }
+.row--col > * {
+    margin-bottom: .4rem;
 }
 #hours-count {
     width: 100%;
@@ -51,12 +28,6 @@ button {
         font-size: .8rem;
         margin: .1rem;
     } 
-
-    &.generate-form-btn {
-        position: relative;
-        font-size: .8rem;
-        left: 60%;
-    }
 
     &.selected,
     &.all {

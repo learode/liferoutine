@@ -28,10 +28,12 @@ function App() {
 
   const tableDataHandler = tableHeadObj => {
     setShowTableSetup(false);
-    if (tableHeadObj?.days.length > 1) {
+    if (tableHeadObj.status !== 'ok') return;
+    
+    if (tableHeadObj.details?.days.length > 1) {
       let headers = {
-        ...tableHeadObj,
-        periods: timeRanges[tableHeadObj.periods]
+        ...tableHeadObj.details,
+        periods: timeRanges[tableHeadObj.details.periods]
       }
       
       setTableData(headers);
@@ -40,6 +42,7 @@ function App() {
       setTableSetup(true);
     }
   }
+
   const showForm = () => setShowTableSetup(true)
 
 

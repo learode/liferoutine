@@ -16,9 +16,16 @@ export default function TimetableSetup (props) {
 
     const [allSelected, setAllSelected] = useState(false);
 
-    const passDetailsUp = () => {
-
-        props.passDetails(details);
+    const passUpHeaders = (status) => {
+        status = status || 'ok';
+        console.log({
+            status,
+            details
+        })
+        props.passDetails({
+            status,
+            details,
+        });
     }
 
     const handleSelected = (event) => {
@@ -60,39 +67,41 @@ export default function TimetableSetup (props) {
 
 
     return (
-        <div className="modal__full">
-            {/* { console.log('w', ...details.days) } */}
-            <form>
-                <div className="form-control">
-                    <label className='labels' htmlFor="hours-count">
-                        Hour many hours do you intend to study
-                    </label>
-                    <select name="hours-count" id="hours-count" onChange={selectTimeHandler}>
-                        <option value='4hours' defaultValue='4hours'> 4 hours (frm 7:00 to 11:00)</option>
-                        <option value='8hours'> 8 hours (from 7:00 to 14:00)</option>
-                        <option value='12hours'> 12 hours</option>
-                    </select>
-                </div>
-                <div className="form-control">
-                    <label className='labels' htmlFor="check">
-                        Which weekdays are you workdays 
-                    </label>
-                    <div className="form-checkbox">
-                        <Button id="check" className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>All</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Mon</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Tue</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Wed</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Thur</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Fri</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Sat</Button>
-                        <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Sun</Button>
+        <div className="modal">
+            <div className="modal__backdrop" onClick={e => passUpHeaders('cancel')}></div>
+            <div className="modal__content">
+                <form>
+                    <div className=" row--col">
+                        <label className='labels' htmlFor="hours-count">
+                            Hour many hours do you intend to study
+                        </label>
+                        <select name="hours-count" id="hours-count" onChange={selectTimeHandler}>
+                            <option value='4hours' defaultValue='4hours'> 4 hours (frm 7:00 to 11:00)</option>
+                            <option value='8hours'> 8 hours (from 7:00 to 14:00)</option>
+                            <option value='12hours'> 12 hours</option>
+                        </select>
                     </div>
-                </div>
-
-                {/* <div className="form-control"> */}
-                    <Button className='generate-form-btn' onClick={passDetailsUp} >Generate Table</Button>
-                {/* </div> */}
-            </form>
+                    <div className="row--col">
+                        <label className='labels' htmlFor="check">
+                            Which weekdays are you workdays 
+                        </label>
+                        <div className="form-checkbox">
+                            <Button id="check" className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>All</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Mon</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Tue</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Wed</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Thur</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Fri</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Sat</Button>
+                            <Button className={`checkbox-btn ${allSelected && 'all'}`} onClick={handleSelected}>Sun</Button>
+                        </div>
+                    </div>
+                    <div className="content__footer row">
+                        <Button className='generate-form-btn' onClick={e => passUpHeaders('ok')} >Generate Table</Button>
+                        <Button className='btn--cancel' onClick={e => passUpHeaders('cancel')}>Cancel</Button>
+                    </div>
+                </form>
+            </div>
         </div>     
     )
 }

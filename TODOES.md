@@ -24,10 +24,12 @@ eg 7 to 24
 - [] Load an already existing table.
 - [x] If selected a dropdown of time allowing for selection of the time frame the course is at: **Don't Get**
 - [x] allow entering subject by a right click: **Not Yet**
+- [x] Cancel btn for modal TimetableSetup
+- [x] Close on the backdrop click
 
 ### Random
 - [x] create a contextmenu component
-- [] Style the menu context
+- [x] Style the menu context
 - [] animate the menu context
 - [] incorporate the menu context on todo item clicked
 - [] incorporate the menu context to the table for deletion and well, well.
