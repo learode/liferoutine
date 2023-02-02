@@ -1,4 +1,5 @@
 import './SubjectDetails.scss';
+import './Modal.scss';
 
 import { useState, useEffect } from 'react';
 
