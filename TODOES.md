@@ -18,14 +18,15 @@ eg 7 to 24
 - [x] Add the cancel btn and styles to cancel the action of a modal.
 - [x] Deny empty input text field.
 - [x] cancel the modal on the outer backdrop click.
+- [x] Cancel btn for modal TimetableSetup
+- [x] Close on the backdrop click
 - [] Allow labels of difficulties, VeryBoring, Boring, Guessing, Interesting, VeryInteresting
 - [] The Delete button is annoying, double check then have the option to delete
 - [] Make the entered subject persistent.
 - [] Load an already existing table.
+- [] Setup the table with the days of the week in order not just random.
 - [x] If selected a dropdown of time allowing for selection of the time frame the course is at: **Don't Get**
 - [x] allow entering subject by a right click: **Not Yet**
-- [x] Cancel btn for modal TimetableSetup
-- [x] Close on the backdrop click
 
 ### Random
 - [x] create a contextmenu component
