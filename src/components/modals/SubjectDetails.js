@@ -9,6 +9,7 @@ import Button from './../button/Button'
 const SubjectDetails = (props) => {
     const {days, thisDay, getSubject} = (props)
     const [subject, setSubject] = useState('');
+    const [ difficulty, setDifficulty ] = useState('');
     const [isSubEmpty, setIsSubEmpty] = useState(true);
 
     // instead of literal day e.g mon or so, will use the index give by the map function
@@ -20,6 +21,7 @@ const SubjectDetails = (props) => {
               status,
               data: {
                 subject,
+                difficulty,
                 days: selectedDays,
               }
         })
@@ -51,7 +53,9 @@ const SubjectDetails = (props) => {
         setIsSubEmpty(true);
       }
     }
-    const handleSelect = e => {}
+    const selectDifficultyHandler = e => {
+      setDifficulty(e.target.value);
+    }
 
 
     // record the checked day i.e. the day that is clicked
@@ -76,7 +80,7 @@ const SubjectDetails = (props) => {
           <form>
             <div className='row row_select_sub'>
               <input type="text" name="subject" id="subject" placeholder='Phys3103' onChange={handleInput}/>
-              <select name="dificult" id="dificulty" onChange={handleSelect}>
+              <select name="dificult" id="dificulty" onChange={selectDifficultyHandler}>
                 <option value="easy" defaultValue="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
