@@ -16,13 +16,8 @@ const Menu = ({ options, position, status }: MenuOptions) => {
       var showing = setTimeout(() => {
         setShow(true);
       }, 1000);
-
     }
-    //  else {
-    //   setShow(false)
-    // }
     return () => {
-    //   // return setShow(false);
       clearTimeout(showing)
     };
   }, [position])

@@ -19,14 +19,12 @@ const Todoes = props => {
         const { clientX: frmLeft, clientY: frmTop } = e;
 
         // console.log(e)
-        setTimeout(() => {
-            setPosition(prev => {
-                return {
-                    frmTop,
-                    frmLeft,
-                }
-            })
-        }, 10)
+        setPosition(prev => {
+            return {
+                frmTop,
+                frmLeft,
+            }
+        })
 
         setShowContextM(true);
     }
