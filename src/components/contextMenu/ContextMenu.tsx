@@ -12,10 +12,9 @@ const Menu = ({ options, position, status }: MenuOptions) => {
   useEffect(() => {
     setShow(false)
     if (position) {
-      console.log('useEffect, ', position)
       var showing = setTimeout(() => {
         setShow(true);
-      }, 1000);
+      }, 100);
     }
     return () => {
       clearTimeout(showing)
@@ -29,8 +28,8 @@ const Menu = ({ options, position, status }: MenuOptions) => {
         left: `${position.frmLeft}px`,
       }}
     >
-      <div className="option">Edit</div>
-      <div className="option">Delete</div>
+      <div className="option" onClick={() => console.log('behavior for option1')} >Edit</div>
+      <div className="option" onClick={options?.option1.behavior}>Delete</div>
     </div>
   );
 };

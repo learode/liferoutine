@@ -4,6 +4,7 @@ import './Table.scss';
 import SubjectDetails from '../modals/SubjectDetails';
 import { loadStorage, setStorage } from './../../utils/storage';
 import { useEffect, useState } from 'react';
+import Menu from '../contextMenu/ContextMenu.tsx';
 
 const SUBJECTS_KEY = 'lr_subs';
 
@@ -100,7 +101,29 @@ const Table = ({data, deleteTable}) => {
 
     }, [data?.days.length, data?.periods]);
 
+    /*********** Context Menu Related  **********/
+    const [ showContextM, setShowContextM] = useState(false);
+    const [ position, setPosition ] = useState({});
+    // const [render, setRender] = useState(false);
 
+
+    const closeContextHandler = e => {
+        setShowContextM(false)
+    }
+    const contextMenuHandler = e => {
+        e.preventDefault()
+        const { clientX: frmLeft, clientY: frmTop } = e;
+
+        // console.log(e)
+        setPosition(prev => {
+            return {
+                frmTop,
+                frmLeft,
+            }
+        })
+
+        setShowContextM(true);
+    }
 
     /**
      * TableAvaibility get using the data props verify which Jsx to return
@@ -111,7 +134,12 @@ const Table = ({data, deleteTable}) => {
         return (
           <>
             {isInsert && <SubjectDetails days={data.days} getSubject={getSubject} thisDay={thisDay}/>}
-            <table onContextMenu={e => {e.preventDefault(); console.log(e) }} className='timetable'>
+            {showContextM && <Menu options={{option1: {
+                              label: 'Delete', 
+                              behavior: () => { console.log('Option1 from table')}
+                              }
+                          }}  position={position}/> }
+            <table onContextMenu={contextMenuHandler} onClick={closeContextHandler} className='timetable'>
               <caption className='t__caption'>
                 <h2>
                   This Table's Title

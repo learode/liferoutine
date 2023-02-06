@@ -2,7 +2,7 @@
 
 .context-menu {
     position: fixed;
-    z-index: 10000;
+    z-index: 1000000;
     width: 160px;
     height: 200px;
     padding: 0.9rem 1rem;
@@ -22,7 +22,7 @@
         border-radius: inherit;
     }
 
-    &:hover {
+    & div:hover {
         cursor: pointer;
         background-color: #343434;
     }

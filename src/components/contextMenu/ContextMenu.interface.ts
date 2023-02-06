@@ -3,9 +3,21 @@ interface Position {
     frmLeft: Number,
 }
 
+interface Options {
+    option1: {
+        label: String,
+        behavior: () => {},
+    }
+
+    Option2?: {
+        label: String,
+        behavior: () => {},
+    }
+}
+
 interface MenuOptions {
     status: boolean,
-    options?: Object,
+    options?: Options,
     className: String,
     position: Position,
 }
