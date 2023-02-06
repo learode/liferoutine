@@ -1,31 +1,29 @@
 
-import { useState } from 'react';
 import './Table.scss';
 
 import SubjectDetails from '../modals/SubjectDetails';
-import { useEffect } from 'react';
+import { loadStorage, setStorage } from './../../utils/storage';
+import { useEffect, useState } from 'react';
 
-
-
-
+const SUBJECTS_KEY = 'lr_subs';
 
 
 const Table = ({data, deleteTable}) => {
     /** 
-     * @var tableSubjects has the structure of an aray with the index
+     * @var subjectDatajects has the structure of an aray with the index
      * beening the parentRow of the table and which is a collection of subject
      * the index of the subject is the same as the thisCol value.
      * 
      * parentRow is the time?
      * cellCol is the index of the day of the week
      * 
-     * tableSub = [
+     * subjectData = [
      *    [phys, maths],
      *    [fre, sprt],
      * ]
      * }
     */
-    const [tableSub, setTableSub] = useState([]);
+    const [subjectData, setsubjectData] = useState([]);
     const [isInsert, setIsInsert] = useState(false);
 
     const [parentRow, setParentRow] = useState(null);
@@ -40,44 +38,67 @@ const Table = ({data, deleteTable}) => {
     const getSubject = objt => {
 
       if (objt.status === 'ok') {
-        let cellData = tableSub[parentRow] || [];
-        
-        for (let day of objt.data.days) {
-          cellData[day] = objt.data.subject;
+        const { days, subject, } = objt.details;
+        // directly mutating a useState value is not recom
+        let cellData = [...subjectData[parentRow]] || [];
+
+
+        /**
+         * Read the value from the data.days assign this value to the day
+         * This value is either a num or a an empty str
+         */
+        for (let day of days) {
+          // accessing be index requires a num as index not an empty str
+          // Thus only the cell with a value in the data.days in updated
+          cellData[day] = subject;
         }
+
+        setsubjectData(pv => {
+          // frm the prev, located the taken parentRow, replace it with the updated version
+          pv[parentRow] = cellData;
+
+          setStorage(SUBJECTS_KEY, pv);
+          return pv;
+        })
+
+        // console.log(cellData, 'afters');
       }
 
-      setIsInsert(false);
+      setIsInsert(false); // this closes the subject collection form
     }
 
     /**
-     * **clickHandler** handle what happens when a cell is clicked
+     * **clickHandler** handle what happens when a cell is clicked, the function
+     * with set the `parentRow` to that click rowId and the thisDay as the colId
      * @param {event} e browser event
      */
     const clickHandler = (e) => {
       setIsInsert(true);
       setParentRow(e.target.parentNode.dataset.rowId);
       setThisDay(e.target.dataset.colId);
-      // console.log(e.target.parentNode.dataset.rowId)
     }
 
 
-    // Setup the table struct using periods and day into tableSub
+    // Setup the table struct using periods and day into 
     // once when page load
     useEffect(() => {
       let temp_period_sub = [];
+      let storedSub = loadStorage(SUBJECTS_KEY);
       
-      if (data) {
-        setTableSub(prev => {
-          for (let p in data.periods) { 
-            temp_period_sub[p] = prev?.[p] ? [...prev[p]] : new Array(data.days.length).fill('');
-            
-          }
+      let newData = storedSub ? storedSub : data?.periods;
+      
+      if (newData) {
+        setsubjectData(prev => {
+            for (let p in newData) { 
+              temp_period_sub[p] = storedSub?.[p] ? [...newData[p]] : new Array(data.days.length).fill('');
+              
+            }
+
           return temp_period_sub;
         })
       }
 
-    }, [data]);
+    }, [data?.days.length, data?.periods]);
 
 
 
@@ -108,19 +129,18 @@ const Table = ({data, deleteTable}) => {
               </thead>
               <tbody>
                 {
-                  tableSub.map((subs, periodPos) => {
-                      return (
-                        <tr key={periodPos} data-row-id={periodPos}>
-                          <th>{data.periods[periodPos]}</th>
-                          {
-                            subs.map((sjt, i) => {
-                              return <td key={i} onClick={clickHandler} data-col-id={i}>{sjt}</td>
-                            })
-                          }
-                        </tr>
-                      ) 
-                    }
-                    )
+                  subjectData.map((subs, periodPos) => {
+                    return (
+                      <tr key={periodPos} data-row-id={periodPos}>
+                        <th>{data.periods[periodPos]}</th>
+                        {
+                          subs.map((sjt, i) => {
+                            return <td key={i} onClick={clickHandler} data-col-id={i}>{sjt}</td>
+                          })
+                        }
+                      </tr>
+                    ) 
+                  })
                 }
               </tbody>
             </table> 

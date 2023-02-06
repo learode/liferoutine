@@ -23,7 +23,7 @@ const timeRanges = {
 function App() {
   const [showTableSetup, setShowTableSetup] = useState(false);
   const [tableSetup, setTableSetup] = useState(false);
-  const [tableData, setTableData] = useState(null);
+  const [headerData, setHeaderData] = useState(null);
 
 
   const tableDataHandler = tableHeadObj => {
@@ -36,7 +36,7 @@ function App() {
         periods: timeRanges[tableHeadObj.details.periods]
       }
       
-      setTableData(headers);
+      setHeaderData(headers);
       setStorage(HEADERS_KEY, headers);
       
       setTableSetup(true);
@@ -49,7 +49,7 @@ function App() {
 
   const deleteTable = () => {
     removeStorage(HEADERS_KEY);
-    setTableData(null);
+    setHeaderData(null);
     setTableSetup(false);
     setShowTableSetup(false);
   }
@@ -58,7 +58,7 @@ function App() {
   useEffect(() => {
     let tableHeadData = loadStorage(HEADERS_KEY);
     if (tableHeadData) {
-      setTableData(tableHeadData);
+      setHeaderData(tableHeadData);
       setTableSetup(true);
     }
 
@@ -98,7 +98,7 @@ function App() {
 
           <Route
             path="/"
-            element={<Table data={tableData} deleteTable={deleteTable}/>}
+            element={<Table data={headerData} deleteTable={deleteTable}/>}
           />
 
           <Route 
@@ -123,7 +123,7 @@ function App() {
       </main>
 
       {/* hide the button when there is table data is gotten */}
-      {!tableData && <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>}
+      {!headerData && <Button className='btn__float' onClick={showForm} disabled={tableSetup ? true : false} >+</Button>}
     </div>
   );
 }

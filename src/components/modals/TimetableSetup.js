@@ -18,10 +18,7 @@ export default function TimetableSetup (props) {
 
     const passUpHeaders = (status) => {
         status = status || 'ok';
-        console.log({
-            status,
-            details
-        })
+        
         props.passDetails({
             status,
             details,

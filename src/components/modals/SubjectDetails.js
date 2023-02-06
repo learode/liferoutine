@@ -19,7 +19,7 @@ const SubjectDetails = (props) => {
     const passUpSubject = (status) => {
         getSubject({
               status,
-              data: {
+              details: {
                 subject,
                 difficulty,
                 days: selectedDays,
@@ -66,10 +66,6 @@ const SubjectDetails = (props) => {
         }
         return '';
       })
-
-      console.log(ds)
-
-
       setSelectedDays(ds);
     }, [days, thisDay])
 
