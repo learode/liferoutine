@@ -4,23 +4,12 @@ import { useState } from 'react';
 import ContextMenu from '../../components/contextMenu/ContextMenu.tsx';
 
 
-const initialTodoes = [
-    {
-        title: 'Sleep by 12pm',
-        complete: false,
-        id: 1,
-    },
-    {
-        title: 'Wake up by 5:30pm',
-        complete: true,
-        id: 2,
-    }
-]
-
 
 const Todoes = props => {
     const [ showContextM, setShowContextM] = useState(false);
     const [ position, setPosition ] = useState({});
+    // const [render, setRender] = useState(false);
+
 
     const closeContextHandler = e => {
         setShowContextM(false)
@@ -29,14 +18,16 @@ const Todoes = props => {
         e.preventDefault()
         const { clientX: frmLeft, clientY: frmTop } = e;
 
-        console.log(e)
-        setPosition(prev => {
-            return {
-                frmTop,
-                frmLeft,
-            }
-        })
-        // constextMenu.style.top = `${mouseX}px`;
+        // console.log(e)
+        setTimeout(() => {
+            setPosition(prev => {
+                return {
+                    frmTop,
+                    frmLeft,
+                }
+            })
+        }, 10)
+
         setShowContextM(true);
     }
     return (

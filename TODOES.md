@@ -34,3 +34,4 @@ eg 7 to 24
 
 - [x] create a contextmenu component
 - [x] Style the menu context
+- [x] animate the menu context

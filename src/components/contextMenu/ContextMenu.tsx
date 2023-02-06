@@ -1,22 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MenuOptions } from "./ContextMenu.interface";
 
-import './ContextMenu.scss';
+import "./ContextMenu.scss";
 
-const Menu = ({options, className, position}: MenuOptions) => {
+const Menu = ({ options, position, status }: MenuOptions) => {
+  const [ show, setShow ] = useState<boolean>(false);
 
+  // The position is update faster than the removal and placement of .visible making a flash be rendering
+  // const [render, setRender ] = useState<boolean>(false);
 
-    return (
-        <div className={`context-menu ${className}`} style={{
-            top: `${position.frmTop}px`,
-            left: `${position.frmLeft}px`,
-        }}>
-            <div className="option">Edit</div>
-            <div className="option">Delete</div>
-        </div>
-    )
+  useEffect(() => {
+    setShow(false)
+    if (position) {
+      console.log('useEffect, ', position)
+      var showing = setTimeout(() => {
+        setShow(true);
+      }, 1000);
 
-}
-
+    }
+    //  else {
+    //   setShow(false)
+    // }
+    return () => {
+    //   // return setShow(false);
+      clearTimeout(showing)
+    };
+  }, [position])
+  return (
+    <div
+      className={`context-menu ${show? 'visible' : ''}`}
+      style={{
+        top: `${position.frmTop}px`,
+        left: `${position.frmLeft}px`,
+      }}
+    >
+      <div className="option">Edit</div>
+      <div className="option">Delete</div>
+    </div>
+  );
+};
 
 export default Menu;

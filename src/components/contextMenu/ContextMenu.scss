@@ -1,24 +1,36 @@
-@import '../../utils/color';
+@import "../../utils/color";
 
 .context-menu {
     position: fixed;
     z-index: 10000;
     width: 160px;
     height: 200px;
-    padding: .9rem 1rem;
+    padding: 0.9rem 1rem;
 
     background-color: $black-primary;
     border-radius: 4px;
-    
+
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top left;
+
     .option {
         padding: 8px 10px;
         color: floralwhite;
-        font-size: .8rem;
+        font-size: 0.8rem;
         border-radius: inherit;
-
-        &:hover {
-            cursor: pointer;
-            background-color: #343434;
-        }
     }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #343434;
+    }
+}
+
+div.context-menu.visible {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 200ms ease-in;
+    visibility: visible;
 }

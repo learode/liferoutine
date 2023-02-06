@@ -4,7 +4,8 @@ interface Position {
 }
 
 interface MenuOptions {
-    options: Object,
+    status: boolean,
+    options?: Object,
     className: String,
     position: Position,
 }
